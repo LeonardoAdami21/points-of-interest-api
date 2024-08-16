@@ -1,0 +1,9 @@
+{
+  "name": "points-of-interest-api",
+  "version": "1.0.0",
+  "description": "API for Points of Interest",
+  "main": "server.js",
+  "author": "Leonardo Adami",
+  "license": "MIT",
+  "private": false
+}
