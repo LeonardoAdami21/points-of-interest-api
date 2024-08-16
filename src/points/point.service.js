@@ -21,14 +21,15 @@ const findAll = async () => {
 const getNerbyPoints = async (coordenateX, coordenateY, maxDistance) => {
   try {
     const points = await findAll();
-    const maxDistance = parseFloat(maxDistance);
-    return points.filter((point) => {
+    const maxDist = parseFloat(maxDistance);
+    const result =  points.filter((point) => {
       const distance = Math.sqrt(
         Math.pow(point.coordernateX - coordenateX, 2) +
           Math.pow(point.coordenateY - coordenateY, 2),
       );
-      return distance <= maxDistance;
+      return distance <= maxDist;
     });
+    return result;
   } catch (error) {
     throw new Error({ message: error.message });
   }

@@ -29,7 +29,7 @@ const findAll = async (req, res) => {
 
 const getNerbyPoints = async (req, res) => {
   try {
-    const { coordenateX, coordenateY, maxDistance } = req.body;
+    const { coordenateX, coordenateY, maxDistance } = req.query;
     if (coordenateY < 0 || coordenateX < 0) {
       return res.status(400).send({
         message: "Coordinates must be positive numbers",
@@ -39,9 +39,9 @@ const getNerbyPoints = async (req, res) => {
       return res.status(409).json({ message: "Coordinates must be numbers" });
     }
     const points = await pointService.getNerbyPoints(
-      coordenateX,
-      coordenateY,
-      maxDistance,
+      parseFloat(coordenateX),
+      parseFloat(coordenateY),
+      parseFloat(maxDistance),
     );
     return res.status(200).json(points);
   } catch (error) {
