@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Points of Interest API",
+    "description": "API for Points of Interest",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Leonardo Adami",
+      "url": "https://github.com/LeonardoAdami21"
+    }
+  },
+  "tags": [
+    {
+      "name": "Points of Interest",
+      "description": "API for Points of Interest"
+    }
+  ],
+  "paths": {
+    "/points-of-interest": {
+      "post": {
+        "tags": ["Points of Interest"],
+        "summary": "Create a new Point of Interest",
+        "description": "Create a new Point of Interest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRequestPoint"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Point created successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Points of Interest"],
+        "summary": "Get all Points of Interest",
+        "description": "Get all Points of Interest",
+        "responses": {
+          "200": {
+            "description": "Points of Interest retrieved successfully"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/points-of-interest/nearby": {
+      "get": {
+        "tags": ["Points of Interest"],
+        "summary": "Get all Points of Interest",
+        "description": "Get all Points of Interest",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "coordenateX",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "example": 10
+          },
+          {
+            "in": "query",
+            "name": "coordenateY",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "example": 10
+          },
+          {
+            "in": "query",
+            "name": "maxDistance",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Points of Interest retrieved successfully"
+          },
+          "404": {
+            "description": "Points of Interest not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateRequestPoint": {
+        "type": "object",
+        "properties": {
+          "namePoi": {
+            "type": "string"
+          },
+          "coordernateX": {
+            "type": "number"
+          },
+          "coordenateY": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
