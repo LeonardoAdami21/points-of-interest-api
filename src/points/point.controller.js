@@ -9,12 +9,12 @@ const createPoint = async (req, res) => {
       });
     }
     if (isNaN(coordernateX) || isNaN(coordenateY)) {
-      return res.status(409).json({ message: "Coordinates must be numbers" });
+      return res.status(400).json({ message: "Coordinates must be numbers" });
     }
     const newPoint = await pointService.create(req.body);
     return res.status(201).json(newPoint);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -23,7 +23,7 @@ const findAll = async (req, res) => {
     const points = await pointService.findAll();
     return res.status(200).json(points);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -45,7 +45,7 @@ const getNerbyPoints = async (req, res) => {
     );
     return res.status(200).json(points);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
